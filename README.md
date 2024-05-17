@@ -8,17 +8,18 @@ Short read pipeline of CIWARS for taxonomy classification and ARG normalization 
 
 # Installation
 <pre>
-git clone https://github.com/muhit-emon/Assembly_Pipeline.git
-cd Assembly_Pipeline
+git clone https://github.com/muhit-emon/read-pipeline.git
+cd read-pipeline
 bash install.sh
 conda env create -f environment.yml
 </pre>
 # conda environment activation
-After installation, a conda environment named <b>assembly_pipeline</b> will be created.<br>
+After installation, a conda environment named <b>read_pipeline</b> will be created.<br>
 To activate the environment, run the following command <br>
 <pre>
-conda activate assembly_pipeline
+conda activate read_pipeline
 </pre>
+
 # Download the compressed Blast Database file from Zenodo (25 GB) to run MetaCompare and uncompress it
 Go inside <b>Assembly_Pipeline</b> directory
 <pre>
