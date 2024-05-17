@@ -41,7 +41,7 @@ Go inside <b>read-pipeline</b> directory. <br> <br>
 nextflow run short-read-pipeline.nf --R1 &ltabsolute/path/to/forward/read/file&gt --R2 &ltabsolute/path/to/reverse/read/file&gt --out_fname &ltprefix of output file name&gt
 rm -r work
 </pre>
-The command line options for this script (<b>assembly_pipeline.nf</b>) are: <br><br>
+The command line options for this script (<b>short-read-pipeline.nf</b>) are: <br><br>
 <b>--R1</b>: The absolute path of the fastq file containing forward read sequences <br>
 <b>--R2</b>: The absolute path of the fastq file containing reverse read sequences <br>
 <b>--out_fname</b>: The prefix of the output file name <br><br>
