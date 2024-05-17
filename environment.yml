@@ -1,12 +1,13 @@
-name: assembly_pipeline
+name: read_pipeline
 channels:
   - conda-forge
   - bioconda
 dependencies:
   - python=3.10
   - nextflow
-  - blast
-  - megahit
+  - kraken2
+  - bracken
+  - vsearch
   - pandas
   - numpy
   - biopython
