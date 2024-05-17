@@ -20,24 +20,25 @@ To activate the environment, run the following command <br>
 conda activate read_pipeline
 </pre>
 
-# Download the compressed Blast Database file from Zenodo (25 GB) to run MetaCompare and uncompress it
-Go inside <b>Assembly_Pipeline</b> directory
+# Download the compressed standard 16 GB kraken2 DB and uncompress it
+Go inside <b>read-pipeline</b> directory and create a folder named k2_DB
 <pre>
-wget https://zenodo.org/records/10471551/files/BlastDB.tar.gz
-tar -zxvf BlastDB.tar.gz
+mkdir k2_DB
+cd k2_DB
 </pre>
 
-# Download the compressed DeepARG-DB and mobileOG database (DB.tar.gz) from one drive, put it inside the "Assembly_Pipeline" directory and uncompress it
-Go to <a href="https://virginiatech-my.sharepoint.com/:u:/g/personal/muhitemon_vt_edu/EQjIpLhOmMVFotPRDiK5Id0BGQFVSVVbyEWOmRWiz-rYUA">One Drive</a> and download <b>DB.tar.gz</b>. Put it inside the <b>Assembly_Pipeline</b> directory and uncompress it.
+Now download the kraken2 DB inside this folder and uncompress it
 <pre>
-tar -zxvf DB.tar.gz
+wget https://genome-idx.s3.amazonaws.com/kraken/k2_standard_16gb_20240112.tar.gz
+tar -zxvf k2_standard_16gb_20240112.tar.gz
+rm k2_standard_16gb_20240112.tar.gz
 </pre>
 
 # Usage on metagenomic paired-end short read data
-Go inside <b>Assembly_Pipeline</b> directory. <br> <br>
+Go inside <b>read-pipeline</b> directory. <br> <br>
 <b>To run the assembly pipeline on metagenomic paired-end short read data (<span> &#42; </span>.fastq/<span> &#42; </span>.fq/<span> &#42; </span>.fastq.gz/<span> &#42; </span>.fq.gz), use the following command</b> <br>
 <pre>
-nextflow run assembly_pipeline.nf --R1 &ltabsolute/path/to/forward/read/file&gt --R2 &ltabsolute/path/to/reverse/read/file&gt --out_fname &ltprefix of output file name&gt
+nextflow run short-read-pipeline.nf --R1 &ltabsolute/path/to/forward/read/file&gt --R2 &ltabsolute/path/to/reverse/read/file&gt --out_fname &ltprefix of output file name&gt
 rm -r work
 </pre>
 The command line options for this script (<b>assembly_pipeline.nf</b>) are: <br><br>
@@ -45,4 +46,4 @@ The command line options for this script (<b>assembly_pipeline.nf</b>) are: <br>
 <b>--R2</b>: The absolute path of the fastq file containing reverse read sequences <br>
 <b>--out_fname</b>: The prefix of the output file name <br><br>
 
-With <b>--out_fname S1</b>, three output files named <b>S1_resistome_risk.txt</b>, <b>S1_ARGs.faa</b>, and <b>S1_ARGs_and_mobility.tsv</b> will be generated inside <b>Assembly_Pipeline</b> directory. <br><br>
+With <b>--out_fname S1</b>, output files named <b>S1.k2report</b>, <b>S1_S.bracken</b>, <b>S1_G.bracken</b>, <b>S1_rpoB_ARG_norm.tsv</b>, and <b>S1_drug_wise_rpoB_norm.tsv</b> will be generated inside <b>read-pipeline</b> directory. <br><br>
