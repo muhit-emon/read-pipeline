@@ -1,5 +1,5 @@
 # read-pipeline
-Short read pipeline of CIWARS for taxonomy classification and ARG normalization based on rpoB marker genes
+Short read pipeline of CIWARS for taxonomy classification of bacterial pathogens and computation of ARG abundance based on rpoB marker gene normalization
 # Requirements
 <ol>
   <li>Linux operating system</li>
