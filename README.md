@@ -20,18 +20,12 @@ To activate the environment, run the following command <br>
 conda activate read_pipeline
 </pre>
 
-# Download the compressed standard 16 GB kraken2 DB and uncompress it
-Go inside <b>read-pipeline</b> directory and create a folder named k2_DB
+# Download the compressed bacterial pathogen database and uncompress it
+Go inside <b>read-pipeline</b> directory, download the pathogen DB compatible with Kraken2, and uncompress it
 <pre>
-mkdir k2_DB
-cd k2_DB
-</pre>
-
-Now download the kraken2 DB inside this folder and uncompress it
-<pre>
-wget https://genome-idx.s3.amazonaws.com/kraken/k2_standard_16gb_20240112.tar.gz
-tar -zxvf k2_standard_16gb_20240112.tar.gz
-rm k2_standard_16gb_20240112.tar.gz
+wget https://zenodo.org/records/14537567/files/CIWARS_Pathogen_DB.tar.gz
+tar -zxvf CIWARS_Pathogen_DB.tar.gz
+rm CIWARS_Pathogen_DB.tar.gz
 </pre>
 
 # Usage on metagenomic paired-end short read data
