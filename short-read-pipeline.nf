@@ -8,7 +8,9 @@ params.R2 = "Read2_file"
 
 params.out_fname = "output"
 
-params.k2_DB = "$projectDir/k2_DB/"
+//params.k2_DB = "$projectDir/k2_DB/"
+params.pathogen_DB = "$projectDir/CIWARS_Pathogen_DB/" // Bacterial Pathogen DB
+params.non_prokaryote_DB = "$projectDir/non-prokaryote-DB/" // Human + RefSeq complete Fungi + RefSeq complete Protozoa + NCBI UniVec. To learn more, visit Kraken2 manual
 
 params.ARG_DB = "$projectDir/DB/DeepARG-DB"
 params.ARG_DB_LEN = "$projectDir/DB/DeepARG_DB.len"
@@ -34,6 +36,27 @@ process QC{
 
 }
 
+process filter_non_prokaryote_reads {
+
+    //publishDir "$projectDir", mode: "copy"
+
+    input:
+    path qc_R1
+    path qc_R2
+
+    output:
+    path "${params.out_fname}_ucseqs_1.fastq.gz", emit: filtered_R1
+    path "${params.out_fname}_ucseqs_2.fastq.gz", emit: filtered_R2
+
+    """
+    kraken2 --threads 16 -db ${params.non_prokaryote_DB} --gzip-compressed --output ${params.out_fname}_k2_out.txt --unclassified-out ${params.out_fname}_ucseqs#.fastq --paired $qc_R1 $qc_R2
+    gzip ${params.out_fname}_ucseqs_1.fastq ${params.out_fname}_ucseqs_2.fastq
+    rm ${params.out_fname}_k2_out.txt
+    """
+
+}
+
+
 process kraken2 {
 
     publishDir "$projectDir", mode: "copy"
@@ -46,27 +69,9 @@ process kraken2 {
     path "${params.out_fname}.k2report", emit: k2report
 
     """
-    kraken2 --use-names -db ${params.k2_DB} --threads 16 --report ${params.out_fname}.k2report --gzip-compressed --paired $qc_R1 $qc_R2 > ${params.out_fname}.k2report
+    kraken2 --use-names -db ${params.pathogen_DB} --threads 16 --report ${params.out_fname}.k2report --gzip-compressed --paired $qc_R1 $qc_R2 > ${params.out_fname}.k2report
     """
 
-}
-
-process bracken {
-
-    publishDir "$projectDir", mode: "copy"
-
-    input:
-    path k2report
-
-    output:
-    path "${params.out_fname}_S.bracken", emit: bracken_report_S
-    path "${params.out_fname}_G.bracken", emit: bracken_report_G
-
-    """
-    bracken -d ${params.k2_DB} -i $k2report -o ${params.out_fname}_S.bracken -r 150 -l S
-    bracken -d ${params.k2_DB} -i $k2report -o ${params.out_fname}_G.bracken -r 150 -l G
-    """
-    // read length should be computed from the input
 }
 
 process merge_reads {
@@ -145,9 +150,9 @@ workflow {
     
     qc_ch = QC(fw_file_ch, rev_file_ch)
 
-    k2_ch = kraken2(qc_ch.qc_R1, qc_ch.qc_R2)
+    filter_ch = filter_non_prokaryote_reads(qc_ch.qc_R1, qc_ch.qc_R2)
 
-    bracken_ch = bracken(k2_ch.k2report)
+    k2_ch = kraken2(filter_ch.filtered_R1, filter_ch.filtered_R2)
 
     merged_reads_ch = merge_reads(qc_ch.qc_R1, qc_ch.qc_R2)
 
