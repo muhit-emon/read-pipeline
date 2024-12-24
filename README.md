@@ -20,7 +20,7 @@ To activate the environment, run the following command <br>
 conda activate read_pipeline
 </pre>
 
-# Download bacterial pathogen database and non-prokaryote database
+# Download bacterial pathogen database (22 GB) and non-prokaryote database (11 GB)
 Go inside <b>read-pipeline</b> directory. Download the pathogen DB and non-prokaryote DB compatible with Kraken2 and uncompress them.
 <pre>
 wget https://zenodo.org/records/14537567/files/CIWARS_Pathogen_DB.tar.gz
