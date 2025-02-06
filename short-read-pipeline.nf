@@ -10,7 +10,7 @@ params.out_fname = "output"
 
 //params.k2_DB = "$projectDir/k2_DB/"
 params.pathogen_DB = "$projectDir/CIWARS_Pathogen_DB/" // Bacterial Pathogen DB
-params.non_prokaryote_DB = "$projectDir/non-prokaryote-DB/" // Human + RefSeq complete Fungi + RefSeq complete Protozoa + NCBI UniVec. To learn more, visit Kraken2 manual
+//params.non_prokaryote_DB = "$projectDir/non-prokaryote-DB/" // Human + RefSeq complete Fungi + RefSeq complete Protozoa + NCBI UniVec. To learn more, visit Kraken2 manual
 
 params.ARG_DB = "$projectDir/DB/DeepARG-DB"
 params.ARG_DB_LEN = "$projectDir/DB/DeepARG_DB.len"
@@ -36,6 +36,7 @@ process QC{
 
 }
 
+/*
 process filter_non_prokaryote_reads {
 
     //publishDir "$projectDir", mode: "copy"
@@ -55,7 +56,7 @@ process filter_non_prokaryote_reads {
     """
 
 }
-
+*/
 
 process kraken2 {
 
@@ -150,9 +151,9 @@ workflow {
     
     qc_ch = QC(fw_file_ch, rev_file_ch)
 
-    filter_ch = filter_non_prokaryote_reads(qc_ch.qc_R1, qc_ch.qc_R2)
+    //filter_ch = filter_non_prokaryote_reads(qc_ch.qc_R1, qc_ch.qc_R2)
 
-    k2_ch = kraken2(filter_ch.filtered_R1, filter_ch.filtered_R2)
+    k2_ch = kraken2(qc_ch.qc_R1, qc_ch.qc_R2)
 
     merged_reads_ch = merge_reads(qc_ch.qc_R1, qc_ch.qc_R2)
 
