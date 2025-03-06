@@ -127,6 +127,7 @@ process rpoB_normalization_ARG {
 
 }
 
+/*
 process rpoB_normalization_ARG_drug_wise {
 
     publishDir "$projectDir", mode: "copy"
@@ -142,7 +143,7 @@ process rpoB_normalization_ARG_drug_wise {
     """
 
 }
-
+*/
 
 workflow {
 
@@ -161,6 +162,6 @@ workflow {
 
     rpoB_ARG_norm_ch = rpoB_normalization_ARG(aln_ch.aln_ARG, aln_ch.aln_rpoB)
 
-    rpoB_normalization_ARG_drug_wise(rpoB_ARG_norm_ch.rpoB_ARG_norm)
+    //rpoB_normalization_ARG_drug_wise(rpoB_ARG_norm_ch.rpoB_ARG_norm)
 
 }
