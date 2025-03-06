@@ -21,7 +21,7 @@ conda activate read_pipeline
 </pre>
 
 # Download bacterial pathogen database (22 GB)
-Go inside <b>read-pipeline</b> directory. Download the pathogen DB and non-prokaryote DB compatible with Kraken2 and uncompress them.
+Go inside <b>read-pipeline</b> directory. Download the pathogen DB compatible with Kraken2 and uncompress them.
 <pre>
 wget https://zenodo.org/records/14537567/files/CIWARS_Pathogen_DB.tar.gz
 tar -zxvf CIWARS_Pathogen_DB.tar.gz
