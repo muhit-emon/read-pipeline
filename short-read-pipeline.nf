@@ -12,7 +12,7 @@ params.out_fname = "output"
 params.pathogen_DB = "$projectDir/CIWARS_Pathogen_DB/" // Bacterial Pathogen DB
 //params.non_prokaryote_DB = "$projectDir/non-prokaryote-DB/" // Human + RefSeq complete Fungi + RefSeq complete Protozoa + NCBI UniVec. To learn more, visit Kraken2 manual
 
-params.ARG_DB = "$projectDir/DB/DeepARG-DB"
+params.ARG_DB = "$projectDir/DB/DeepARG-read-DB"
 params.ARG_DB_LEN = "$projectDir/DB/DeepARG_DB.len"
 
 params.rpoB_DB = "$projectDir/DB/rpoB"
