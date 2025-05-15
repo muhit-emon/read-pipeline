@@ -41,3 +41,7 @@ The command line options for this script (<b>short-read-pipeline.nf</b>) are: <b
 <b>--out_fname</b>: The prefix of the output file name <br><br>
 
 With <b>--out_fname S1</b>, output files named <b>S1.k2report</b>, <b>S1_rpoB_ARG_norm.tsv</b>, and <b>S1_drug_wise_rpoB_norm.tsv</b> will be generated inside <b>read-pipeline</b> directory. <br><br>
+
+# Reference
+Emon MI, Cheung YF, Stoll J, Rumi MA, Brown C, Choi JM, Moumi NA, Ahmed S, Song H, Sein J, Yao S. CIWARS: a web server for antibiotic resistance surveillance using longitudinal metagenomic data. Journal of Molecular Biology. 2025 Apr 21:169159.
+https://doi.org/10.1016/j.jmb.2025.169159
